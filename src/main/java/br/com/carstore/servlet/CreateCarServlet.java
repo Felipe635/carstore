@@ -7,6 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import br.com.carstore.servlet.dao.CarDao;
+import br.com.carstore.servlet.model.Car;
+
+
 @WebServlet("/create-car")
 public class CreateCarServlet extends HttpServlet {
 
@@ -15,9 +19,13 @@ public class CreateCarServlet extends HttpServlet {
 
         String carName = request.getParameter("car-name");
 
+       /* CarDao cd = new CarDao();
+        cd.createCar(new Car(carName));*/
+
         System.out.println(carName);
 
         request.getRequestDispatcher("index.html").forward(request, response);
+
 
     }
 
