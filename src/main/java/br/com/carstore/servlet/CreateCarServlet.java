@@ -5,6 +5,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.awt.datatransfer.DataFlavor;
 import java.io.IOException;
 
 import br.com.carstore.servlet.dao.CarDao;
@@ -15,16 +16,17 @@ import br.com.carstore.servlet.model.Car;
 public class CreateCarServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
-        String carName = request.getParameter("car-name");
+        String carName = req.getParameter("car-name");
+        
+        Car car = new Car(carName);
 
-       /* CarDao cd = new CarDao();
-        cd.createCar(new Car(carName));*/
+        new CarDao().createCar(car);
 
         System.out.println(carName);
 
-        request.getRequestDispatcher("index.html").forward(request, response);
+        resp.sendRedirect("/find-all-cars");
 
 
     }
